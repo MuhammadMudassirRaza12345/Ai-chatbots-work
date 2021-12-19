@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <H1>Password Checker</H1>
+    
+<input type="password" id="name">
+<button onclick="check()">Check</button>
+
+
+    <script>
+
+        function check(){
+          var name = document.getElementById("name").value;
+          
+           
+
+        if (name === "raza") {
+
+            alert("Login Successfully");
+
+        }
+        else {
+
+            alert("Incorrect Password");
+        }
+        name = document.getElementById("name").value='';
+        }
+
+
+    </script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade Checker!</title>
+</head>
+<body style="background-color:black;">
+    <div style="text-align: center; margin-top: 10%; background-color: white;margin-left: 400px; margin-right: 400px;height: 300px;">
+        <h1 style="font-family: Georgia, 'Times New Roman', Times, serif;padding: 10px;color: royalblue;">Grade Checker!</h1>
+        <input id="num1" type="number" placeholder="Please enter your percentage" style="padding: 5px; margin-bottom: 10px; text-align: center;" >
+        <div><button onclick="check()" style="margin: 1px; padding: 5px;" >Check Grade</button></div>
+        <div style="background-color: white;">
+            <h1 id="cgpa" style="color: cyan;"></h1>
+            <h1 id="grade" style="color:cyan"></h1>
+        </div>
+    </div>
+    
+    
+    <script>
+function check() {
+    var num2 = document.getElementById("num1").value;
+    
+    if (num2 >= 0 && num2 < 50) {
+        alert("your CGPA is 0  "+"\n"+"\n"+"your  Grade is F  ");
+        document.getElementById("cgpa").innerText = "CGPA : 0";
+        document.getElementById("grade").innerText = "Grade : F";
+    }
+    else if (num2 >= 50 && num2 < 60) {
+        alert("your CGPA is 1  "+"\n"+"\n"+"your  Grade is D ");
+        document.getElementById("cgpa").innerText = "CGPA : 1";
+        document.getElementById("grade").innerText = "Grade : D";
+    }
+    else if (num2 >= 60 && num2 < 70) {
+        alert("your CGPA is 2  "+"\n"+"\n"+"your  Grade is C  ");
+        document.getElementById("cgpa").innerText = "CGPA : 2";
+        document.getElementById("grade").innerText = "Grade : C";
+    }
+    else if (num2 >= 70 && num2 < 80) {
+        alert("your CGPA is 3  "+"\n"+"\n"+"your  Grade is B  ");
+        document.getElementById("cgpa").innerText = "CGPA : 3";
+        document.getElementById("grade").innerText = "Grade : B";
+    }
+    else if (num2 >= 80 && num2 < 90) {
+        alert("your CGPA is 4  "+"\n"+"\n"+"your  Grade is A  ");
+        document.getElementById("cgpa").innerText = "CGPA : 4";
+        document.getElementById("grade").innerText = "Grade : A";
+    }
+    else if (num2 >= 90 && num2 <= 100) {
+        alert("your CGPA is 4.3  "+"\n"+"\n"+"your  Grade is A+  ");
+        document.getElementById("cgpa").innerText = "CGPA : 4.3";
+        document.getElementById("grade").innerText = "Grade : A+";
+    }
+}
+    </script>
+</body>
+</html>
