@@ -10,15 +10,19 @@ body{
     background-attachment: fixed;
     background-size: cover;
 }
+#bt2:hover{
+    margin-top: 5px !important;
+    box-shadow:10px 10px 25px 10px rgba(134, 133, 133, 0.3);
+}
+
+
+/* 
+
 /* #bt2 :hover{
 background-color: black !important;
 } */
 /* body{
     /* background-image: url("1.jpg"); */
-    background-color: rgb(100, 221, 237) !important;
+    /* background-color: rgb(100, 221, 237) !important; */
 
-} */
-#bt2:hover{
-    margin-top: 5px !important;
-    box-shadow:10px 10px 25px 10px rgba(134, 133, 133, 0.3);
-}
+/* } */ 
