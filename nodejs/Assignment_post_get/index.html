@@ -1,0 +1,105 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title> AI_ChatBot_Server_Post_Task</title>
+     <link rel="stylesheet" href="style.css">
+     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+ </head>
+ <body>
+  
+    <div class="container"  >
+        <h1>AI ChatBot Server Post Task</h1>
+        <br>
+        <br>
+        <br>
+        <div class="circle">
+            <br>
+            <label for="input">What's on your mind?🙄🙄</label>
+            <br>
+            <input type="text" placeholder="I think..."  id="PostInput">
+            <br>
+            <button id="postBtn">Post</button>
+            <br>
+            <button onclick=getAllPost()>Get ALL Posts</button>
+            <br>
+       </div>
+        <ol id="result"></ol>        
+    </div>
+
+            
+<script>
+   // Opnen Source Contribute In First Time
+   const Post = ()=> {
+           let postInput = document.getElementById('PostInput');
+           if(postInput.value != ''){
+                   let Obj = {
+                   text : postInput.value
+                   }   
+                    axios.post('https://post-get-testing-111.herokuapp.com/posts', Obj) // This is use for cloud
+                    //    axios.post('http://localhost:3000/post', Obj) // This is use for local system
+                           .then(function (response) {
+                               console.log(response);
+                           
+                           })
+                           .catch(function (error) {
+                               console.log(error);
+                           });
+                           postInput.value = " "; 
+           }
+           else{
+               alert("Please Enter Correct Post. Empty Post Not Allowed")
+           }   
+       }
+
+   let btn = document.getElementById('postBtn');
+   // Call EventListener
+   btn.addEventListener('click',Post);
+
+   const getAllPost = ()=>{
+       let result = document.getElementById('result');
+           //   Get Request
+            //    axios.get('http://localhost:3000/posts')  // This is use for local system
+                axios.get('https://post-get-testing-111.herokuapp.com/posts') // This is use for cloud
+                   .then(function (response) {
+                       // handle success
+                       let html = '';
+                       for(let i = 0; i<response.data.length; i++){
+                           console.log(response.data[i].text);
+                           let value = '';
+                           value +=response.data[i].text;
+                           html += `
+                           <li> ${value} </li>  
+                           <br>      
+                           `;
+                       }
+                       result.innerHTML = html;
+           
+   })
+   .catch(function (err) {
+           // handle error
+           console.log(err);
+       });
+   }     
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ </body>
+ </html>
