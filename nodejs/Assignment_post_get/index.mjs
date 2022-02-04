@@ -1,35 +1,39 @@
 // import express from library express(yani library ka ander jo express ka function honga wo used kraga hum)
-import express from 'express'
+import express from 'express';
 // express ka function ko humna const app ka naam sa assign kiya ha(library wala express ko ma na call krdia ha)
 
 // var cors = require('cors')
 import cors from "cors";
 
-
-
-
-const app = express()
-app.use(express.json())
-
-
-app.use(cors())
+const app = express();
+app.use(express.json());
+app.use(cors());
 
 //this is not allow in server this is for database just for understanding we do
 var posts =[
-  {text:"pakistan 0"}
-  ,{text:"lahore 1"},{text: "islamabad 2"}
+  {text:"pakistan 0"},
+  {text:"lahore 1"},
+  {text: "islamabad 2"}
 ];
 
 //--------get-------------
-app.get('/post/:id', (req, res) => {
+app.get("/", (req, res) => {
+  res.send("Hola 🤠 I'm your ExpressJS server!");
+});
 
-const id = Number(req.params.id);
+app.get("/post/:id", (req, res) => {
+  const id = Number(req.params.id);
+  console.log(posts[id]);
   res.send(posts[id]);
-})  //aik post ae gi
+  console.log(posts);
+});
 
-  app.get('/posts', (req, res) => {
-  res.send(posts)
-})     ///aik sa ziada posts ae gi
+
+ //aik post ae gi
+ app.get("/posts", (req, res) => {
+  res.send(posts);
+});
+       ///aik sa ziada posts ae gi
 
 //----------post------------
 app.post('/post', (req, res) => {
