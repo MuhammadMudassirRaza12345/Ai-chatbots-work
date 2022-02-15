@@ -1,0 +1,28 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+.t1{
+    font-family: 'Segoe UI',     Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+    background-color: aqua;
+    border: cyan;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+ 
+.header2 .container{
+    background-color: black;
+
+ } 
+.form-label{
+    color: white;
+}
+table, th, td {
+    border:1px solid gold !important;
+    background-color: black;
+    color: white;
+  }
+  th, td{
+      text-align: center !important;
+  }  
