@@ -8,6 +8,9 @@ npm install -g create-react-app
 And then, you can create your app using the command,
 npx create-react-app <Name of your app>
 
+cd my-app
+npm start
+
 #convert react app into plain html css
 npm run build 
 
@@ -33,4 +36,7 @@ now i do any change in existing project
 
 
 
-#
+#another hosting platform 
+a)firebase
+b)surge
+c)netlify
