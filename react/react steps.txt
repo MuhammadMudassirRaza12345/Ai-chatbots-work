@@ -40,3 +40,50 @@ now i do any change in existing project
 a)firebase
 b)surge
 c)netlify
+
+
+#use state in react component
+
+Aik aesi cheez jis ma hum kuch rakh da or iski state change na ho (e.g button)
+e.g: in software phone like darkmode or sleeping mode
+
+state variable hm is waqt banata hain jb hum koe aesi cheez pr display krni ho or isko change bhi krna ho
+// used state 
+
+e.g:
+import React ,{ useState } from 'react';
+import ReactDOM from 'react-dom';
+import logo from './logo.svg';
+import './App.css';
+
+function Room() {
+  
+  // let roll =5   //in js
+
+
+  // first variable roll is used to read only and the second one setroll is used to make change in first variable
+  const [roll ,setroll] =useState(5)
+
+
+  
+  function increment() {
+    setroll(roll + 1) ;
+    console.log("roll :" + roll);
+
+  }
+
+  return (
+    <div className="room"> {roll} <button onClick={increment}>Change</button> </div>
+  );
+}
+
+
+function App() {
+  return (
+    <div className="App">
+       <Room/>
+    </div>
+  );
+}
+
+export default App;
