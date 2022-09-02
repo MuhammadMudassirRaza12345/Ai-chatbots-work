@@ -61,21 +61,21 @@ app.post("/webhook", (request, response) => {
 
 app.post("/twiliowebhook", (req, res, next) => {
 
+   console.log("twiliowebhook");
+  console.log(req.body);
+
   console.log("message: ", req.body.Body);
   let twiml = new twilio.twiml.MessagingResponse()
-  twiml.message('The Robots are coming! Head for the hills!');
-
-  res.header('Content-Type', 'text/xml');
-  res.send(twiml.toString());
-  // let response = new twilio.twiml.MessagingResponse();
-
-  // console.log("twiliowebhook");
-  // console.log(req.body);
+  twiml.message('Hello welcome to my pizza shop!');
 
   // // // todo: call dialogflow
 
-  // response.message("response from custom tier");
-  // res.send(response.toString());
+  res.header('Content-Type', 'text/xml');
+  res.send(twiml.toString());
+   
+
+  
+ 
 
 
 
