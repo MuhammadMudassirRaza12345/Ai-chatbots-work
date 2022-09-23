@@ -78,7 +78,7 @@ app.post("/twiliowebhook", async(req, res, next) => {
 
   console.log("message: ", req.body.Body);
 
-  twiml.message(`Hello sir welcome to my pizza shop!`);
+  twiml.message(`Hello ${req.body.ProfileName}  welcome to my pizza shop!`);
 
   // // // todo: call dialogflow
   // Create a new session
