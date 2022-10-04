@@ -1,7 +1,7 @@
 import express from "express";
 import morgan from "morgan";
-import { WebhookClient, Text, Suggestion, Card, Image, Payload } from 'dialogflow-fulfillment';
-// import dialogflowFulfilment from "dialogflow-fulfillment";
+import { WebhookClient, Text, Suggestion, Card, Image, Payload} from 'dialogflow-fulfillment';
+import dialogflowFulfilment from "dialogflow-fulfillment";
 import bodyParser from "body-parser";
 import twilio from "twilio";
 import cors from "cors";
@@ -51,7 +51,44 @@ app.post("/webhook", (request, response) => {
     console.log("PizzaSize=>", PizzaSize);
     console.log("pizzaFlavors=>", pizzaFlavors);
 
-    agent.add(`Response from server, here is your order for ${qty} ${PizzaSize} ${pizzaFlavors} pizza.Your order is placed successfully!`);
+    // agent.add(`Response from server, here is your order for ${qty} ${PizzaSize} ${pizzaFlavors} pizza.Your order is placed successfully!`);
+    // let text = new Text(`Response from server, here is your order for ${qty} ${PizzaSize} ${pizzaFlavors} pizza.Your order is placed successfully!`);
+    // text.setText(`Response from server, here is your order for ${qty} ${PizzaSize} ${pizzaFlavors} pizza.Your order is placed successfully!`)
+    // text.setSsml(`<speak>
+    //                   <p>
+    //                     <s>This is a response from server </s>
+    //                     <s> Here is your order for ${qty} ${PizzaSize} ${pizzaFlavors} pizza </s>
+    //                   </p>
+    //        </speak>`)
+    // agent.add(text)
+    ;
+    agent.add( `<speak>
+    <p>
+      <s>This is a response from server </s>
+      <s> Here is your order for ${qty} ${PizzaSize} ${pizzaFlavors} pizza </s>
+    </p>
+      </speak>`);
+    
+
+//  for web 
+    let payload1 = new Payload("PLATFORM_UNSPECIFIED", {
+      "text":`Response from server, here is your order for ${qty} ${PizzaSize} ${pizzaFlavors} pizza.Your order is placed successfully!`
+    });
+    agent.add(payload1);   
+
+    // for dialogflow
+    let payload2 = new Payload("DIALOGFLOW_CONSOLE", {
+      "text":`Response from server, here is your order for ${qty} ${PizzaSize} ${pizzaFlavors} pizza.Your order is placed successfully!`
+    });
+    agent.add(payload2);  
+    
+    // let suggestion = new Suggestion('reply to be overwritten');
+    // suggestion.setReply('reply overwritten');
+    // for suggestion
+    agent.add(new Suggestion('I want to place another order'));
+    agent.add(new Suggestion('order status'));
+    agent.add(new Suggestion('change order'));
+    agent.add(new Suggestion('thanks'));
 
 
   }
@@ -70,74 +107,74 @@ app.post("/webhook", (request, response) => {
 });
 
 // whatsapp integration
-app.post("/twiliowebhook", async(req, res, next) => {
+// app.post("/twiliowebhook", async(req, res, next) => {
 
-  let twiml = new twilio.twiml.MessagingResponse();
-  console.log("twiliowebhook");
-  console.log(req.body);
+//   let twiml = new twilio.twiml.MessagingResponse();
+//   console.log("twiliowebhook");
+//   console.log(req.body);
 
-  console.log("message: ", req.body.Body);
+//   console.log("message: ", req.body.Body);
 
-  twiml.message(`Hello  ${req.body.ProfileName} welcome to my pizza shop!`);
+//   twiml.message(`Hello  ${req.body.ProfileName} welcome to my pizza shop!`);
 
-  // // // todo: call dialogflow
-  // Create a new session
-const sessionClient = new dialogflow.SessionsClient(
-  {
-    keyFilename: "./google-credentials.json"
-  }
-);
+//   // // // todo: call dialogflow
+//   // Create a new session
+// const sessionClient = new dialogflow.SessionsClient(
+//   {
+//     keyFilename: "./google-credentials.json"
+//   }
+// );
 
-  const projectId = "helloagent-cmvfbt"
-  const sessionId = req.body.sessionId || "session123"
-  const query = req.body.Body;
-  const languageCode = "en-US"
-
-
-  // The path to identify the agent that owns the created intent.
-  const sessionPath = sessionClient.projectAgentSessionPath(
-    projectId,
-    sessionId);
+//   const projectId = "helloagent-cmvfbt"
+//   const sessionId = req.body.sessionId || "session123"
+//   const query = req.body.Body;
+//   const languageCode = "en-US"
 
 
-
-  // // The text query request.
-  const request = {
-    session: sessionPath,
-    queryInput: {
-      text: {
-        // The query to send to the dialogflow agent
-        text: query,
-        // The language used by the client (en-US)
-        languageCode: languageCode,
-      },
-    },
-  };
+//   // The path to identify the agent that owns the created intent.
+//   const sessionPath = sessionClient.projectAgentSessionPath(
+//     projectId,
+//     sessionId);
 
 
-  // console.log(request)
-  // // Send request and log result
 
-  const responses = await sessionClient.detectIntent(request).catch(err => {
-    console.log(err)
-  })
+//   // // The text query request.
+//   const request = {
+//     session: sessionPath,
+//     queryInput: {
+//       text: {
+//         // The query to send to the dialogflow agent
+//         text: query,
+//         // The language used by the client (en-US)
+//         languageCode: languageCode,
+//       },
+//     },
+//   };
+
+
+//   // console.log(request)ss
+//   // // Send request and log result
+
+//   const responses = await sessionClient.detectIntent(request).catch(err => {
+//     console.log(err)
+//   })
    
-  // collecting text responses
+//   // collecting text responses
    
-  // collecting text responses
+//   // collecting text responses
       
-  {
-    responses[0]?.queryResult?.fulfillmentMessages?.map(eachMessage => {
-        if (eachMessage.platform === "PLATFORM_UNSPECIFIED" && eachMessage.message === "text") {
-            twiml.message(eachMessage.text.text[0])
-        }
-    })
-}
+//   {
+//     responses[0]?.queryResult?.fulfillmentMessages?.map(eachMessage => {
+//         if (eachMessage.platform === "PLATFORM_UNSPECIFIED" && eachMessage.message === "text") {
+//             twiml.message(eachMessage.text.text[0])
+//         }
+//     })
+// }
   
-  res.header('Content-Type', 'text/xml');
-  res.send(twiml.toString());
+//   res.header('Content-Type', 'text/xml');
+//   res.send(twiml.toString());
 
-});
+// });
 
 // react integeration
 
@@ -189,10 +226,12 @@ const sessionClient = new dialogflow.SessionsClient(
 
   const responses = await sessionClient.detectIntent(request)
 
-  // console.log('responses ==>', responses);
+  // console.log('responses ==>', responses[0]);
   // console.log('responses ==>', JSON.stringify(responses));
+  // console.log("resp: ", JSON.stringify(responses[0]?.queryResult?.fulfillmentMessages));
+  // console.log("webhookPayload: ", JSON.stringify(responses[0]?.queryResult?.webhookPayload));
   // console.log("resp: ", responses[0].queryResult.fulfillmentText);
-  // console.log("resp: ", responses[0].queryResult.fulfillmentText);
+  
   let messages = [];
 
   // collecting text responses
@@ -215,8 +254,29 @@ const sessionClient = new dialogflow.SessionsClient(
         })
       }
     })
-  }
-  res.send(messages);
+   }
+   // collecting suggestion chips
+   responses[0]?.queryResult?.fulfillmentMessages?.map(eachMessage => {
+    if (eachMessage.platform === "PLATFORM_UNSPECIFIED" && eachMessage.message === "quickReplies") {
+        messages.push({
+            sender: "chatbot",
+            quickReplies: eachMessage?.quickReplies?.quickReplies
+        })
+    }
+})
+// images
+// cards
+
+// collecting audio response
+ // collecting audio response
+ messages.push({ sender: "chatbot", audio: responses[0]?.outputAudio })
+
+ res.send(messages);
+
+
+
+  // // messages.push({ sender: "chatbot",audio : responses[0]?.outputAudio })
+  // res.send(messages);
 
   // }catch(err){
 

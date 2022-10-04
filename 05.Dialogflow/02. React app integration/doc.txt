@@ -1,0 +1,23 @@
+Heroku:
+// https://devdojo.com/bryanborge/adding-google-cloud-credentials-to-heroku
+Converstions:
+
+https://developers.google.com/assistant/conversational/prompts-richhttps://developers.google.com/assistant/conversational/prompts-rich
+
+// https://developers.google.com/assistant/conversational/prompts-rich
+
+
+
+
+
+
+Fulfillment:
+https://www.npmjs.com/package/dialogflow-fulfillment
+
+
+or in your existing project 
+sever>
+go to node modules>
+dialogflow fulfillment>
+rich-responses.md
+webhook-client.md

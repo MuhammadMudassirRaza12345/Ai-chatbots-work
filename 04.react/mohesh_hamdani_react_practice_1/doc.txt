@@ -1,0 +1,21 @@
+https://www.youtube.com/watch?v=Ke90Tje7VS0
+
+first install node.js
+
+npm i -g create-react-app
+
+Also install vs code
+
+
+extensions:
+simple React snippets
+prettier-code formater
+
+now create react app
+npx create-react-app my-app
+cd my-app
+npm start
+
+
+https://mui.com/material-ui/getting-started/learn/
+https://react-bootstrap.github.io/getting-started/introduction
